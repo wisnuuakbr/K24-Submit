@@ -1,5 +1,4 @@
-# Starter Template Laravel
-Creating Base Template for Laravel Projects
+# K24 Submit Test
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
@@ -36,8 +35,8 @@ Instructions on how to use them in your own application are linked below.
 Make sure all requirements are installed on the system.
 Clone the project and install dependencies:
 ```bash
-$ git clone https://github.com/wisnuuakbr/starter-template-laravel.git
-$ cd starter-template-laravel
+$ git clone https://github.com/wisnuuakbr/K24-Submit.git
+$ cd K24-Submit
 $ composer install
 ```
 
@@ -48,7 +47,7 @@ Change the config for your local server
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_DATABASE=template_builder
+DB_DATABASE=K-24_db
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -60,7 +59,7 @@ $ php artisan key:generate
 ```
 
 ## Migration & Seeder
-Run the migrations table:
+Run the migrations:
 ```bash
 $ php artisan migrate
 ```
