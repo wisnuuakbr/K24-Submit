@@ -32,6 +32,16 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="no_ktp">No KTP</label>
+                        <input type="number" class="form-control  @error('no_ktp') is-invalid @enderror" name="no_ktp"
+                            value="{{ old('no_ktp') }}" id="no_ktp" placeholder="Masukkan no ktp">
+                        @error('no_ktp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="no_hp">No Handphone</label>
                         <input type="number" class="form-control  @error('no_hp') is-invalid @enderror" name="no_hp"
                             value="{{ old('no_hp') }}" id="no_hp" placeholder="Masukkan no handphone">
@@ -69,19 +79,10 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="no_ktp">No KTP</label>
-                        <input type="number" class="form-control  @error('no_ktp') is-invalid @enderror" name="no_ktp"
-                            value="{{ old('no_ktp') }}" id="no_ktp" placeholder="Masukkan no ktp">
-                        @error('no_ktp')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="foto_path">Foto</label>
+                        <label for="foto_path">Foto Diri</label>
                         <div class="form-group">
                             <input type="file" name="foto_path" class="filestyle @error('foto_path') is-invalid @enderror" data-buttonname="btn-secondary">
+                            <small class="form-text text-muted"><i>*Max size 1MB</i></small>
                         </div>
                         @error('foto_path')
                             <span class="invalid-feedback" role="alert">

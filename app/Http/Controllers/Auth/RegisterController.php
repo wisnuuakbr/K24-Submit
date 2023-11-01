@@ -78,14 +78,10 @@ class RegisterController extends Controller
         // Validate file size
         if (request()->hasFile('foto_path')) {
             $file = request()->file('foto_path');
-            // $maxSize = 1024; // Maximum size in kilobytes (1MB)
-
-            // $this->validate(request(), [
-            //     'foto_path' => ['file', 'max:' . $maxSize],
-            // ]);
-            $path = $file->store('photos');
+            $filename = $data['nama'] . '_' . 'Foto' . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/user_photo', $filename);
             // Update the 'foto_path' field in the user record
-            $data['foto_path'] = $path;
+            $data['foto_path'] = $filename;
         }
 
         return User::create([
@@ -94,6 +90,7 @@ class RegisterController extends Controller
             'role'              => 'member',
             'no_hp'             => $data['no_hp'],
             'no_ktp'            => $data['no_ktp'],
+            'foto_path'         => $data['foto_path'],
             'tanggal_lahir'     => $tanggal_lahir,
             'jenis_kelamin'     => $data['jenis_kelamin'],
             'password'          => Hash::make($data['password']),

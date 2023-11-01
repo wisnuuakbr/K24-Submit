@@ -16,7 +16,8 @@
                                     <th class="text-center">NAMA</th>
                                     <th class="text-center">EMAIL</th>
                                     <th class="text-center">ROLE</th>
-                                    <th></th></th>
+                                    <th class="text-center">Foto</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,6 +29,11 @@
                                         <td>{{ $data->email }}</td>
                                         <td class="text-center">{{ $data->role }}</td>
                                         <td class="text-center">
+                                            <img src="{{ asset('storage/user_photo/' . $data->foto_path) }}" alt="User Photo" style="max-width: 100px; max-height: 100px;">
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="javascript:void(0)" id="btn-view-post" data-id="{{ $data->id }}"
+                                                class="btn btn-info btn-sm"><i class="typcn typcn-clipboard"></i> Detail</a>
                                             <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->id }}"
                                                 class="btn btn-warning btn-sm"><i class="typcn typcn-edit"></i> EDIT</a>
                                             <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $data->id }}"
@@ -51,6 +57,7 @@
     {{-- MODALS --}}
     @include('components.users.modal-create')
     @include('components.users.modal-edit')
+    @include('components.users.modal-view')
     <script>
         //button delete event
         $('body').on('click', '#btn-delete-post', function() {

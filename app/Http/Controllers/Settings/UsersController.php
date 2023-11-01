@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 
 class UsersController extends Controller
@@ -47,9 +48,10 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'  => ['required', 'min:6', 'confirmed']
+            'nama'          => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'      => ['required', 'min:6', 'confirmed'],
+            'foto_path'     => ['nullable','max:1024','mimes:jpg,jpeg,png'],
         ]);
 
         //check validasi fail
@@ -57,10 +59,28 @@ class UsersController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $tanggal_lahir = null;
+        // Check if tanggal_lahir is provided and not null
+        if ($request->has('tanggal_lahir') && $request->input('tanggal_lahir') !== null) {
+            $tanggal_lahir = Carbon::createFromFormat('m/d/Y', $request['tanggal_lahir'])->format('Y-m-d');
+        }
+
+        if ($request->foto_path) {
+            $destinationPath = 'storage/user_photo/';
+            $foto_path = $request['nama'] . '_' . 'Foto' . '.' . $request->foto_path->extension();
+            $request->foto_path->move($destinationPath, $foto_path);
+        }
+
         // create post data
         $data = User::create([
             'nama'          => $request->nama,
             'email'         => $request->email,
+            'role'          => $request->role,
+            'no_hp'         => $request->no_hp,
+            'no_ktp'        => $request->no_ktp,
+            'foto_path'     => $foto_path ?? null,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'password'      => Hash::make($request->password)
 
         ]);
@@ -116,7 +136,8 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'nama'          => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'password'      => ['nullable', 'min:6', 'confirmed']
+            'password'      => ['nullable', 'min:6', 'confirmed'],
+            'foto_path'     => ['nullable','max:1024','mimes:jpg,jpeg,png'],
         ]);
 
         //check validasi fail
@@ -124,11 +145,38 @@ class UsersController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $tanggal_lahir = null;
+        // Check if tanggal_lahir is provided and not null
+        if ($request->has('tanggal_lahir') && $request->input('tanggal_lahir') !== null) {
+            $tanggal_lahir = Carbon::createFromFormat('m/d/Y', $request['tanggal_lahir'])->format('Y-m-d');
+        }
+
+        if ($request->foto_path) {
+            $destinationPath = 'storage/user_photo/';
+            if ($data->foto_path != null) {
+
+                $oldImg = $data->foto_path;
+                unlink($destinationPath . '/' . $oldImg);
+
+                $foto_path = $request->foto_path;
+            }
+            $foto_path = $request['nama'] . '_' . 'Foto' . '.' . $request->foto_path->extension();
+            $request->foto_path->move($destinationPath, $foto_path);
+        }else{
+            $foto_path = $data->foto_path;
+        }
+
         // update data data
         $data->update([
-            'nama'       => $request->nama,
-            'email'      => $request->email,
-            'password'   => Hash::make($request->password)
+            'nama'          => $request->nama,
+            'email'         => $request->email,
+            'role'          => $request->role,
+            'no_hp'         => $request->no_hp,
+            'no_ktp'        => $request->no_ktp,
+            'foto_path'     => $foto_path ?? null,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'password'      => Hash::make($request->password)
         ]);
 
         // return response
@@ -147,6 +195,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+
+        // Get user data by ID
+        $user = User::find($id);
+
+        // Check if the user has a photo and delete it
+        if ($user->foto_path) {
+            $destinationPath = 'storage/user_photo/';
+            $photoPath = $destinationPath . $user->foto_path;
+
+            if (file_exists($photoPath)) {
+                unlink($photoPath); // Delete the photo file
+            }
+        }
+
         //delete Users by ID
         User::where('id', $id)->delete();
 
