@@ -47,11 +47,12 @@ class LoginController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            // Get auth user
             $user = Auth::user();
-            // check
-            if ($user->hasRole('member')){
-                return redirect('settings/profile');
+
+            if ($user->hasRole('member')) {
+                // Debug statement
+                // dd("Redirecting to profile.index");
+                return redirect()->route('profile.index');
             }
             return redirect()->intended($this->redirectTo);
         } else {
