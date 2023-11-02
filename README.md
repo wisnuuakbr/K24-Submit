@@ -59,8 +59,11 @@ Run the application:
 ```bash
 $ php artisan serve
 ```
-## Endpoints
+## Account and passwd
+admin : admin@gmail.com / admin123  
+member : member@gmail.com / member123
 
+## Endpoints
 These are the endpoints we will use to create, read, update and delete the course data.
 
 ```bash
