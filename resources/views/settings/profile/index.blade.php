@@ -1,28 +1,26 @@
 @extends('layouts.master')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
             <div class="card">
                 <div class="card-body">
-                    <a href="javascript:void(0)" class="btn btn-info float-right mb-3" id="btn-create-post"><i
-                            class="typcn typcn-plus"></i>
-                        Tambah Data</a>
-                    <h3 class="mt-0 header-title">List User</h3>
-                    <div class="table-responsive">
-                        <table class="table mb-0">
-                            <thead class="thead-default">
-                                <tr>
-                                    <th class="text-center">NO.</th>
-                                    <th class="text-center">NAMA</th>
-                                    <th class="text-center">EMAIL</th>
-                                    <th class="text-center">ROLE</th>
-                                    <th class="text-center">Foto</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                    <div class="card directory-card">
+                        <div class="p-4 directory-content">
+                            <div class="float-right info-icon p-1">
+                                <a href="{{ route('profile.edit', Auth::user()) }}"><i class="mdi mdi-information-variant h5 text-primary"></i> <span class="font-16 text-muted">Info</span></a>
+                            </div>
+                            <div class="media">
+                                <img class="mr-3 rounded-sm" src="{{ asset('storage/user_photo/' . Auth::user()->foto_path) }}" alt="Generic placeholder image" style="max-width: 200px; max-height: 200px;">
+                                <div class="media-body text-white">
+                                    <h3 class="mt-0 font-18 mb-1">{{ Auth::user()->nama }}</h3>
+                                    <p class="text-white-50 m-b-5">{{ Auth::user()->email }}</p>
+                                    <p class="text-white-50 m-b-5">{{ Auth::user()->no_hp }}</p>
+                                    <p class="font-600">{{ strtoupper(Auth::user()->role) }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
                     </div>
                 </div>
             </div>

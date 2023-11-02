@@ -38,7 +38,7 @@
         </a>
         <ul class="submenu">
             <li class="{{ request()->segment(1) == 'settings' && request()->segment(2) == 'profile' ? 'active' : '' }}">
-                <a href="profile">Profile</a>
+                <a href="settings/profile">Profile</a>
             </li>
         </ul>
     </li>

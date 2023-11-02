@@ -35,7 +35,7 @@ route::delete('settings/users/delete/{user_id}', [UsersController::class, 'destr
 route::get('settings/users/show/{user_id}', [UsersController::class, 'show'])->name('users.show');
 route::put('settings/users/update/{user_id}', [UsersController::class, 'update'])->name('users.update');
 
-// Company route
+// Profile Member route
 route::resource('settings/profile', ProfilesController::class);
 
 // Navigations Route
