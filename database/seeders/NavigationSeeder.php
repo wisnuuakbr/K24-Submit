@@ -40,7 +40,7 @@ class NavigationSeeder extends Seeder
             'icon'          => '',
             'parent_id'     => '01002',
             'description'   => 'Pengaturan Navigasi Menu Aplikasi',
-            'display_st'    => '1'
+            'display_st'    => '0'
 
         ]);
         Navigation::create([
@@ -52,13 +52,13 @@ class NavigationSeeder extends Seeder
             'description'   => 'Pengaturan User',
             'display_st'    => '1'
         ]);
-        // Navigation::create([
-        //     'id'            => '01005',
-        //     'name'          => 'Permissions',
-        //     'url'           => 'permissions',
-        //     'icon'          => 'typcn typcn-group-outline',
-        //     'description'   => 'Pengaturan Izin Menu',
-        //     'display_st'    => '1'
-        // ]);
+        Navigation::create([
+            'id'            => '01005',
+            'name'          => 'Profile',
+            'url'           => 'settings/profile',
+            'icon'          => '',
+            'description'   => 'Profile Member',
+            'display_st'    => '0'
+        ]);
     }
 }

@@ -33,6 +33,7 @@ route::get('settings/users', [UsersController::class, 'index'])->name('users');
 route::post('settings/users/store', [UsersController::class, 'store'])->name('users.store');
 route::delete('settings/users/delete/{user_id}', [UsersController::class, 'destroy'])->name('users.destroy');
 route::get('settings/users/show/{user_id}', [UsersController::class, 'show'])->name('users.show');
+route::get('settings/users/edit/{user_id}', [UsersController::class, 'edit'])->name('users.edit');
 route::put('settings/users/update/{user_id}', [UsersController::class, 'update'])->name('users.update');
 
 // Profile Member route

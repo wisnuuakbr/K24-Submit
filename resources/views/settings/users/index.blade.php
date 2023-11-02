@@ -34,7 +34,7 @@
                                         <td class="text-center">
                                             <a href="javascript:void(0)" id="btn-view-post" data-id="{{ $data->id }}"
                                                 class="btn btn-info btn-sm"><i class="typcn typcn-clipboard"></i> Detail</a>
-                                            <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->id }}"
+                                            <a href="{{ route('users.edit', $data->id) }}" id="btn-edit-post" data-id="{{ $data->id }}"
                                                 class="btn btn-warning btn-sm"><i class="typcn typcn-edit"></i> EDIT</a>
                                             <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $data->id }}"
                                                 class="btn btn-danger btn-sm"><i class="typcn typcn-trash"></i> DELETE</a>
@@ -56,7 +56,7 @@
     </div>
     {{-- MODALS --}}
     @include('components.users.modal-create')
-    @include('components.users.modal-edit')
+    {{-- @include('components.users.modal-edit') --}}
     @include('components.users.modal-view')
     <script>
         //button delete event

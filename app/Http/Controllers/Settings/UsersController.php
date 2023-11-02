@@ -118,7 +118,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('settings.users.edit', ['data' => $user]);
     }
 
     /**
@@ -178,13 +179,7 @@ class UsersController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'password'      => Hash::make($request->password)
         ]);
-
-        // return response
-        return response()->json([
-            'success'   => true,
-            'message'   => 'Data berhasil disimpan!',
-            'data'      => $data
-        ]);
+        return redirect()->route('users')->with('success', 'Data updated successfully');
     }
 
     /**
