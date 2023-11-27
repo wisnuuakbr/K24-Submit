@@ -64,7 +64,7 @@ admin : admin@gmail.com / admin123
 member : member@gmail.com / member123
 
 ## Endpoints
-These are the endpoints we will use to create, read, update and delete the course data.
+These are the endpoints we will use to see the member list
 
 ```bash
 GET members → http://localhost:8000/api/members → Retrieves all the members list
